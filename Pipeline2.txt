@@ -1,0 +1,47 @@
+pipeline {
+    agent any
+
+    stages {
+        stage('Deploy to Higher env') {
+            steps {
+                echo 'Deploy to Higher env completed'
+            }
+        }
+        stage('Smoke / Sanity Test') {
+            steps {
+                echo 'Smoke / Sanity Test completed'
+            }
+        }
+        stage('Functional Assurance') {
+            parallel{
+                stage("UI Regression Suite 1"){
+                    steps {
+                        echo 'UI Regression Suite 1 completed'
+                    }
+                }
+                stage("UI Regression Suite 2"){
+                    steps {
+                        echo 'UI Regression Suite 2 completed'
+                    }
+                }
+                stage("API Regression Suite"){
+                    steps {
+                        echo 'API Regression Suite completed'
+                    }
+                }
+            }
+        }
+        
+        stage('Non Functional Assurance') {
+            steps {
+                echo 'Non Functional Assurance completed'
+            }
+        }
+        
+        stage('Release to Production') {
+            steps {
+                echo 'Release to Production completed'
+            }
+        }
+    }
+}
